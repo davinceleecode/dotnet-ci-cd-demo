@@ -31,4 +31,4 @@ jobs:
       run: dotnet build dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln --configuration Release --no-restore
 
     - name: Run Tests
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln --no-restore --verbosity normal 
