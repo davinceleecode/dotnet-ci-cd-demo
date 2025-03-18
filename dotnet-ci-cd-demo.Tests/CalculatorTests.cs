@@ -13,10 +13,10 @@ namespace dotnet_ci_cd_demo.Tests
             var calc = new Calculator();
 
             //Act
-            int result = calc.Add(5, 5);
+            int result = calc.Add(15, 5);
 
             //Assert
-            Assert.Equal(10, result);
+            Assert.Equal(15, result);
         }
 
 
