@@ -10,19 +10,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.0.x'
-
+        
+    - name: Clear NuGet Cache
+      run: dotnet nuget locals all
+      
     - name: Restore dependencies
-      run: dotnet restore --verbosity detailed
+      run: dotnet restore
 
     - name: Build
       run: dotnet build --configuration Release --no-restore
