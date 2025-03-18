@@ -6,7 +6,7 @@ namespace dotnet_ci_cd_demo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("CI/CD Test");
         }
     }
 }
