@@ -22,7 +22,7 @@ jobs:
         dotnet-version: '3.0.x'
         
     - name: Clear NuGet Cache
-      run: dotnet nuget locals all
+      run: dotnet nuget locals all --clear
       
     - name: Restore dependencies
       run: dotnet restore
