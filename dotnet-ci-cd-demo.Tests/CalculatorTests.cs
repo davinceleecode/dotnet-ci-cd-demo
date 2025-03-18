@@ -16,7 +16,7 @@ namespace dotnet_ci_cd_demo.Tests
             int result = calc.Add(50, 50);
 
             //Assert
-            Assert.Equal(100, result);
+            Assert.Equal(0, result);
         }
 
 
