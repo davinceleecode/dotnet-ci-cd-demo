@@ -24,7 +24,7 @@ namespace dotnet_ci_cd_demo.Tests
         public void Subtract_ShouldReturnCorrectDifference()
         {
             //Arrange
-            var calc = new Calculator(); //test
+            var calc = new Calculator();
 
             //Act
             int result = calc.Subtract(100, 100);
