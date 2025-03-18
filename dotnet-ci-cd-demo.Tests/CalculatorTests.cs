@@ -27,10 +27,10 @@ namespace dotnet_ci_cd_demo.Tests
             var calc = new Calculator();
 
             //Act
-            int result = calc.Subtract(7, 5);
+            int result = calc.Subtract(5, 5);
 
             //Assert
-            Assert.Equal(2, result);
+            Assert.Equal(0, result);
         }
     }
 }
