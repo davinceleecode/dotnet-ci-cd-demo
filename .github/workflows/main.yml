@@ -1,4 +1,4 @@
-name: .NET Core CI
+name: .NET Core CI/CD
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: write  # ✅ Fixes the "Resource not accessible by integration" error
 
 jobs:
   build:
@@ -20,10 +23,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.0.x'
-        
+
     - name: Clear NuGet Cache
       run: dotnet nuget locals all --clear
-      
+
     - name: Restore dependencies
       run: dotnet restore dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln
 
@@ -31,7 +34,8 @@ jobs:
       run: dotnet build dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln --configuration Release --no-restore
 
     - name: Run Tests
-      run: dotnet test dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln --no-restore --verbosity normal 
+      run: dotnet test dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln --no-restore --verbosity normal
+
     - name: Publish the application
       run: dotnet publish dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln -c Release -o ./publish
 
