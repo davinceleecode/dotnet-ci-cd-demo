@@ -39,28 +39,38 @@ jobs:
     - name: Publish the application
       run: dotnet publish dotnet-ci-cd-demo/dotnet-ci-cd-demo.csproj -c Release -r win-x64 --self-contained true -o ./publish /p:UseAppHost=true /p:OutputType=Exe
 
+    # 🛑 DELETE EXISTING RELEASE (if exists)
+    - name: Delete existing release and tag
+      uses: dev-drprasad/delete-tag-and-release@v0.2.1
+      with:
+        tag_name: v1.0.latest
+        delete_release: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    # 📦 CREATE A NEW RELEASE
     - name: Create a release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v1.0.${{ github.run_number }}
-        release_name: Release v1.0.${{ github.run_number }}
+        tag_name: v1.0.latest  # Using fixed tag to always overwrite
+        release_name: Latest Release
+        body: "Automated release for the latest push."
         draft: false
         prerelease: false
-        
+
     - name: List published files (debugging step)
       run: ls -R ./publish
 
-
+    # 📤 UPLOAD RELEASE ASSET
     - name: Upload release asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./publish/dotnet-ci-cd-demo.exe  # Adjust this filename
+        asset_path: ./publish/dotnet-ci-cd-demo.exe  # Adjust filename if needed
         asset_name: dotnet-ci-cd-demo.exe
         asset_content_type: application/octet-stream
