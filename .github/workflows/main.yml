@@ -37,7 +37,7 @@ jobs:
       run: dotnet test dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln --no-restore --verbosity normal
 
     - name: Publish the application
-      run: dotnet publish dotnet-ci-cd-demo/dotnet-ci-cd-demo.sln -c Release --self-contained true -r win-x64 -o ./publish
+      run: dotnet publish dotnet-ci-cd-demo/dotnet-ci-cd-demo.csproj -c Release --self-contained true -r win-x64 -o ./publish /p:UseAppHost=true
 
     - name: Create a release
       id: create_release
